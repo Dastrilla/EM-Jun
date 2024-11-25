@@ -78,12 +78,12 @@ class Library:
             print("Ничего не найдено :(")
             
     def show_books(self, books: list["Book"] = None) -> None:
-        headers = self.books[0].__dict__.keys()
-        row_format = "{:<15} " * len(headers)
         if books is None:
             if len(self.books) == 0:
                 print("Библиотека пустая!")
                 return None
+            headers = self.books[0].__dict__.keys()
+            row_format = "{:<15} " * len(headers)
             print(row_format.format(*headers))
             for book in self.books:
                 print(row_format.format(*book.__dict__.values()))

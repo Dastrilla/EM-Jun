@@ -25,11 +25,14 @@ def main()-> None:
                 if not year.isdigit() or int(year) < 0 or int(year) > dt.datetime.now().year:
                     print("Неккоректный год.")
                     continue
+                if not author.isalpha():
+                    print("Неккоректный ввод имени автора")
+                    continue
                 my_library.add_book(title, author, int(year))
 
             case "2":
                 book_id = input("Введите ID книги для удаления: ").strip()
-                if not book_id.isdigit() and int(book_id) < 0:
+                if not book_id.isdigit() or int(book_id) < 0:
                     print("Неккоректный ввод ID.")
                     continue
                 my_library.delete_book(int(book_id))
@@ -48,7 +51,7 @@ def main()-> None:
 
             case "5":
                 book_id = input("Введите ID книги для изменения статуса: ").strip()
-                if not book_id.isdigit() and int(book_id) < 0:
+                if not book_id.isdigit() or int(book_id) < 0:
                     print("Неккоректный ввод ID.")
                     continue
                 status = input("Введите новый статус книги (в наличии/выдана): ").strip()
