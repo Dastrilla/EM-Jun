@@ -25,7 +25,7 @@ def main()-> None:
                 if not year.isdigit() or int(year) < 0 or int(year) > dt.datetime.now().year:
                     print("Неккоректный год.")
                     continue
-                if not author.isalpha():
+                if author.isdigit():
                     print("Неккоректный ввод имени автора")
                     continue
                 my_library.add_book(title, author, int(year))
