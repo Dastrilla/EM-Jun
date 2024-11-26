@@ -1,8 +1,13 @@
 import datetime as dt
 import Library
+import exce
 
 def main()-> None:
     """
+    main()
+    Interface for application operation
+    Depending on the selected item, the following actions are performed
+    If you make an incorrect choice, the program will notify you about it.
     """
     print("Добро пожаловать в систему управление библиотекой!")
     my_library = Library.Library()
@@ -15,18 +20,21 @@ def main()-> None:
         print("5. Изменить статус книги")
         print("6. Выход")
 
-        user_input = input("\n").strip()[0]
+        user_input = input("\n").strip()
 
         match user_input:
             case "1":
                 title = input("Введите название книги: ").strip()
+                if title == "" or title in exce.lib:
+                    print("Неккоректный ввод названия книги")
+                    continue
                 author = input("Введите автора книги: ").strip()
+                if author.isdigit() or author == "" or author in exce.lib:
+                    print("Неккоректный ввод имени автора")
+                    continue
                 year = input("Введите год издания книги: ").strip()
                 if not year.isdigit() or int(year) < 0 or int(year) > dt.datetime.now().year:
                     print("Неккоректный год.")
-                    continue
-                if author.isdigit():
-                    print("Неккоректный ввод имени автора")
                     continue
                 my_library.add_book(title, author, int(year))
 
@@ -42,7 +50,13 @@ def main()-> None:
                                      "1. Заголовок\n"
                                      "2. Автор\n"
                                      "3. Год\n")
+                if search_field not in ["1","2","3"]:
+                    print("Неправильное поле для поиска, убедитесь в корректном выборе.")
+                    continue
                 query = input("Введи данные: ")
+                if query == "":
+                    print("Неккоректный ввод данных")
+                    continue
                 print("Результат поиска: ")
                 my_library.search_book(search_field, query)
 
